@@ -18,9 +18,8 @@ def formattage(data):
     for film in data:
         acteurs = film['cast']
         for i in range(len(acteurs)):
-            acteur = acteurs[i].strip('[]')
-            acteurs[i] = acteur
-
+            acteurs[i] = acteurs[i].strip('[]')
+    return data
 
 
 def genere_graph(data):
@@ -33,13 +32,8 @@ def genere_graph(data):
     return G
 
 
-
-
-
-
-
-json = from_json("extrait.txt")
-json = formattage(json)
-genere_graph(json)
-
+liste_json = from_json("extrait.txt")
+liste_json = formattage(from_json("extrait.txt"))
+G = genere_graph(liste_json)
+nx.draw(G, with_labels=True)
 plt.show()
