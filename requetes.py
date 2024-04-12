@@ -33,7 +33,7 @@ def genere_graph(data):
 
 
 liste_json = from_json("extrait.txt")
-liste_json = formattage(from_json("extrait.txt"))
+liste_json = formattage(liste_json)
 G = genere_graph(liste_json)
 nx.draw(G, with_labels=True)
 plt.show()
