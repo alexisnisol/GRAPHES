@@ -71,7 +71,9 @@ def collaborateurs_communs(G,u,v):
 
 # Q3
 def collaborateurs_proches(G,u,k):
+#    nx.single_source_shortest_path_length(G,u,k)
     ...
+
 def est_proche(G,u,v,k=1):
     ...
 def distance_naive(G,u,v):
