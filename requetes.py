@@ -46,7 +46,7 @@ show_time(start_time)
 start_time = datetime.now()
 
 def collaborateurs_communs(G,u,v):
-    print("TEST ", G)
+    return set(G[u]) & set(G[v])
 
 show_time(start_time)
 
