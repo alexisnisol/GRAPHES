@@ -1,8 +1,16 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-
 from datetime import datetime
 
+#nx.draw(G, with_labels=True)
+#plt.show()
+
+def show_time(start_time):
+    end_time = datetime.now()
+    print('Duration Q1: {}'.format(end_time - start_time))
+
+
+# Q1
 start_time = datetime.now()
 
 def from_json(nom_fichier):
@@ -26,7 +34,8 @@ def formattage(film):
     return film
 
 
-def genere_graph(data):
+def json_vers_nx(chemin):
+    data = from_json(chemin)
     G = nx.Graph()
     for film in data:
         acteurs = film['cast']
@@ -35,13 +44,52 @@ def genere_graph(data):
                 G.add_edge(acteurs[i], acteurs[j])
     return G
 
-liste_json = from_json("extrait.txt")
-G = genere_graph(liste_json)
+show_time(start_time)
 
+# Q2
+start_time = datetime.now()
 
-end_time = datetime.now()
-print('Duration: {}'.format(end_time - start_time))
+def collaborateurs_communs(G,u,v):
+    ...
 
+show_time(start_time)
 
-#nx.draw(G, with_labels=True)
-#plt.show()
+# Q3
+start_time = datetime.now()
+
+def collaborateurs_proches(G,u,k):
+    ...
+def est_proche(G,u,v,k=1):
+    ...
+def distance_naive(G,u,v):
+    ...
+def distance(G,u,v):
+    ...
+
+show_time(start_time)
+
+# Q4
+start_time = datetime.now()
+
+def centralite(G,u):
+    ...
+def centre_hollywood(G):
+    ...
+
+show_time(start_time)
+
+# Q5
+start_time = datetime.now()
+
+def eloignement_max(G:nx.Graph):
+    ...
+
+show_time(start_time)
+
+# Bonus
+start_time = datetime.now()
+
+def centralite_groupe(G,S):
+    ...
+
+show_time(start_time)
