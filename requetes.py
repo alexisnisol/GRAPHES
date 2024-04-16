@@ -46,6 +46,15 @@ show_time(start_time)
 start_time = datetime.now()
 
 def collaborateurs_communs(G,u,v):
+    '''
+    Renvoie l'ensemble des collaborateurs communs de u et v dans G
+    Args:
+        G (nx.Graph) : Le graphe
+        u (str) : un acteur (un sommet du graphe)
+        v (str) : un acteur (un sommet du graphe)
+    Returns:
+        set : l'ensemble des collaborateurs
+    '''
     return set(G[u]) & set(G[v])
 
 show_time(start_time)
