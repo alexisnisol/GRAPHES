@@ -3,6 +3,14 @@ import matplotlib.pyplot as plt
 
 # Q1
 def from_json(nom_fichier):
+    """Renvoie le contenu d'un fichier json sous forme de liste de dictionnaires
+
+    Args:
+        nom_fichier (str): le nom du fichier json
+
+    Returns:
+        list: la liste de dictionnaires
+    """
     liste_csv = []
     try:
         file = open(nom_fichier, "r", encoding="utf8")
@@ -16,6 +24,14 @@ def from_json(nom_fichier):
 
 
 def formattage(film):
+    """formatte le nom des acteurs des films
+
+    Args:
+        film (Dict): le film
+
+    Returns:
+        dict: le film avec les noms formattés
+    """
     acteurs = film['cast']
     for i in range(len(acteurs)):
         acteurs[i] = acteurs[i].strip('[]')
@@ -23,6 +39,14 @@ def formattage(film):
 
 
 def json_vers_nx(chemin):
+    """transforme un fichier json en graphe
+
+    Args:
+        chemin (str): le chemin vers le fichier json
+
+    Returns:
+        nx.Graph: le graphe
+    """
     data = from_json(chemin)
     G = nx.Graph()
     for film in data:
