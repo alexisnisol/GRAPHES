@@ -2,9 +2,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-#nx.draw(G, with_labels=True)
-#plt.show()
-
 def show_time(start_time):
     end_time = datetime.now()
     print('Duration Q1: {}'.format(end_time - start_time))
@@ -29,8 +26,7 @@ def from_json(nom_fichier):
 def formattage(film):
     acteurs = film['cast']
     for i in range(len(acteurs)):
-        acteur = acteurs[i]
-        acteur = acteur.strip('[]')
+        acteurs[i] = acteurs[i].strip('[]')
     return film
 
 
@@ -50,7 +46,7 @@ show_time(start_time)
 start_time = datetime.now()
 
 def collaborateurs_communs(G,u,v):
-    ...
+    print("TEST ", G)
 
 show_time(start_time)
 
