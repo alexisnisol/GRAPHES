@@ -98,7 +98,7 @@ def collaborateurs_proches(G,u,k):
     return collaborateurs
 
 '''
-collaborateurs_proches : 
+collaborateurs_proches :
 Reconnaissez-vous l’algorithme classique en théorie des graphes qui est au coeur de ce programme?
 '''
 
