@@ -68,6 +68,11 @@ def collaborateurs_communs(G,u,v):
         set : l'ensemble des collaborateurs
     '''
     return set(G[u]) & set(G[v])
+'''
+Comment exprimeriez-vous cette notion (ensemble des collaborateurs en commun) en terme de théorie
+des graphes? Pouvez-vous donner une borne inférieure sur le temps nécessaire à l’exécution de votre
+fonction?
+'''
 
 # Q3
 def collaborateurs_proches(G,u,k):
@@ -83,7 +88,6 @@ def collaborateurs_proches(G,u,k):
         return None
     collaborateurs = set()
     collaborateurs.add(u)
-    print(collaborateurs)
     for i in range(k):
         collaborateurs_directs = set()
         for c in collaborateurs:
@@ -93,12 +97,52 @@ def collaborateurs_proches(G,u,k):
         collaborateurs = collaborateurs.union(collaborateurs_directs)
     return collaborateurs
 
+'''
+collaborateurs_proches : 
+Reconnaissez-vous l’algorithme classique en théorie des graphes qui est au coeur de ce programme?
+'''
+
 def est_proche(G,u,v,k=1):
-    ...
+    return v in collaborateurs_proches(G, u, k)
+    
 def distance_naive(G,u,v):
-    ...
+    dist = 1
+    dist_max = len(G.nodes())
+    for _ in range(dist_max):
+        proche = est_proche(G, u, v, dist)
+        if proche:
+            return dist
+        dist += 1
+    return -1
+
+'''
+distance_naive :
+Est-ce que ré-utiliser la fonction précédente vous semble intéressant? Donnez la complexité (asymptotique) d’un tel algorithme.
+'''
+
+
 def distance(G,u,v):
-    ...
+    k = len(G.nodes())
+    if u not in G.nodes:
+        print(u,"est un illustre inconnu")
+        return None
+    collaborateurs = set()
+    collaborateurs.add(u)
+    for i in range(k):
+        collaborateurs_directs = set()
+        for c in collaborateurs:
+            for voisin in G.adj[c]:
+                if v == voisin:
+                    return i+1
+                if voisin not in collaborateurs:
+                    collaborateurs_directs.add(voisin)
+        collaborateurs = collaborateurs.union(collaborateurs_directs)
+    return collaborateurs
+
+'''
+distance :
+Donnez la complexité d’un tel algorithme.
+'''
 
 # Q4
 def centralite(G,u):
