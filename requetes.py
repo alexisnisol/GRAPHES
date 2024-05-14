@@ -168,6 +168,25 @@ distance :
 Donnez la complexité d’un tel algorithme.
 '''
 
+
+def cherche_acteur_mini(acteurs):
+    """Fonction renvoyant l'acteur non visité le plus proche du graphe G
+
+    Args:
+        G (nx.Graph): le graphe
+        visite (set): les acteurs déjà visités
+
+    Returns:
+        str: l'acteur le plus proche
+    """
+    acteur_mini = None
+    distance_mini = None
+    for acteur, dist in acteurs.items():
+        if distance_mini is None or dist < distance_mini:
+            acteur_mini = acteur
+            distance_mini = dist
+    return acteur_mini
+
 # Q4
 def centralite(G,u):
     """Renvoie la centralité de l'acteur u dans le graphe G
@@ -179,11 +198,31 @@ def centralite(G,u):
     Returns:
         int: la distance maximal avec un autre acteur dans le graph
     """
-    distance = 0
+    G.nodes[u]['distance_max'] = 0
     distance_max = 0
-    
-        
-
+    acteur_actuel = u
+    # visite contient les acteurs déjà parcourus
+    visite = set()
+    # acteurs_mini contient les acteurs  qui vont être parcourus
+    acteurs_mini = dict()
+    acteurs_mini[u] = 0
+    # parcours des noeuds du graphe, O(V)
+    while len(visite) < len(G.nodes):
+        # parcoure des voisins du noeud actuel, O(E)
+        for voisin in G.adj[acteur_actuel]:
+            if voisin not in visite:
+                if 'distance_max' not in G.nodes[voisin]:
+                    G.nodes[voisin]['distance_max'] = G.nodes[acteur_actuel]['distance_max'] + 1
+                    acteurs_mini[voisin] = G.nodes[voisin]['distance_max']
+        visite.add(acteur_actuel) # O(1)
+        # on retire l'acteur actuel de la liste des acteurs à parcourir
+        acteurs_mini.pop(acteur_actuel) # O(1)
+        # on actualise la distance maximale
+        if distance_max < G.nodes[acteur_actuel]['distance_max']:
+            distance_max = G.nodes[acteur_actuel]['distance_max']
+        # on cherche l'acteur le plus proche, O(P), P le nombre d'acteurs à parcourir
+        acteur_actuel = cherche_acteur_mini(acteurs_mini)
+    return distance_max
 
 def centre_hollywood(G):
     ...
