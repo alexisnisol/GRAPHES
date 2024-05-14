@@ -25,3 +25,10 @@ show_time(start_time)
 start_time = datetime.now()
 print(req.distance(G, "James Woods", "Roy Jones Jr"))
 show_time(start_time)
+
+G9 = nx.Graph()
+G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
+nx.draw(G9)
+
+print(req.centralite(G9, 4))
+print()

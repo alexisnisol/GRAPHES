@@ -206,9 +206,9 @@ def centralite(G,u):
     # acteurs_mini contient les acteurs  qui vont être parcourus
     acteurs_mini = dict()
     acteurs_mini[u] = 0
-    # parcours des noeuds du graphe, O(V)
+    # parcours des noeuds du graphe, O(|V|) avec V l'ensemble des noeuds
     while len(visite) < len(G.nodes):
-        # parcoure des voisins du noeud actuel, O(E)
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 if 'distance_max' not in G.nodes[voisin]:
@@ -220,9 +220,11 @@ def centralite(G,u):
         # on actualise la distance maximale
         if distance_max < G.nodes[acteur_actuel]['distance_max']:
             distance_max = G.nodes[acteur_actuel]['distance_max']
-        # on cherche l'acteur le plus proche, O(P), P le nombre d'acteurs à parcourir
+        # on cherche l'acteur le plus proche, O(|E|) avec E l'ensemble des arêtes
         acteur_actuel = cherche_acteur_mini(acteurs_mini)
     return distance_max
+
+# O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
 
 def centre_hollywood(G):
     ...
