@@ -89,7 +89,7 @@ def collaborateurs_proches(G,u,k):
     collaborateurs = set()
     collaborateurs.add(u)
     for i in range(k):
-        collaborateurs_directs = set()
+        collaborateurs_directs = set() 
         for c in collaborateurs:
             for voisin in G.adj[c]:
                 if voisin not in collaborateurs:
@@ -102,10 +102,31 @@ collaborateurs_proches :
 Reconnaissez-vous l’algorithme classique en théorie des graphes qui est au coeur de ce programme?
 '''
 
-def est_proche(G,u,v,k=1):
+def est_proche(G, u,v,k=1):
+    """Fonction renvoyant True si l'acteur v est à distance au plus k de l'acteur u dans le graphe G. La fonction renvoie False sinon.
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+        v (str): un acteur
+        k (int, optional): la distance maximale. Defaults to 1.
+
+    Returns:
+        bool: True si v est à distance au plus k de u, False sinon
+    """
     return v in collaborateurs_proches(G, u, k)
     
 def distance_naive(G,u,v):
+    """Fonction renvoyant la distance entre les acteurs u et v dans le graphe G. La fonction renvoie -1 si u et v ne sont pas connectés.
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+        v (str): un acteur
+
+    Returns:
+        int: la distance entre u et v
+    """
     dist = 1
     dist_max = len(G.nodes())
     for _ in range(dist_max):
@@ -118,6 +139,9 @@ def distance_naive(G,u,v):
 '''
 distance_naive :
 Est-ce que ré-utiliser la fonction précédente vous semble intéressant? Donnez la complexité (asymptotique) d’un tel algorithme.
+
+La réutilisation de la fonction précédente ne me semble pas intéressante car elle est situé dans une boucle.
+Nous nous retrouvons donc avec une complexité de O(n^4) avec n le nombre de sommets du graphe.
 '''
 
 
@@ -146,7 +170,21 @@ Donnez la complexité d’un tel algorithme.
 
 # Q4
 def centralite(G,u):
-    ...
+    """Renvoie la centralité de l'acteur u dans le graphe G
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+
+    Returns:
+        int: la distance maximal avec un autre acteur dans le graph
+    """
+    distance = 0
+    distance_max = 0
+    
+        
+
+
 def centre_hollywood(G):
     ...
 
