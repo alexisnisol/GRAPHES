@@ -228,7 +228,14 @@ def centralite(t,u):
 # O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
 
 def centre_hollywood(G):
-    ...
+    minim = None
+    acteur_max = None
+    for acteur in G.nodes:
+        centralite_act = centralite(G, acteur)
+        if acteur_max is None or minim > centralite_act:
+            acteur_max = acteur
+            minim = centralite_act
+    return acteur
 
 # Q5
 def eloignement_max(G:nx.Graph):
