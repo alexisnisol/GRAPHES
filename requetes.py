@@ -161,7 +161,7 @@ def distance(G,u,v):
                 if voisin not in collaborateurs:
                     collaborateurs_directs.add(voisin)
         collaborateurs = collaborateurs.union(collaborateurs_directs)
-    return collaborateurs
+    return -1
 
 '''
 distance :
