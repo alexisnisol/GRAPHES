@@ -228,6 +228,14 @@ def centralite(t,u):
 # O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
 
 def centre_hollywood(G):
+    """retourne l'acteur le plus au centre d'hollywood
+
+    Args:
+        G (nx.Graph): le graph des acteurs
+
+    Returns:
+        str: l'acteur le plus proche
+    """
     minim = None
     acteur_max = None
     for acteur in G.nodes:
@@ -239,7 +247,22 @@ def centre_hollywood(G):
 
 # Q5
 def eloignement_max(G:nx.Graph):
-    ...
+    """La distance maximale entre 2 paires quelquonques du graphe
+
+    Args:
+        G (nx.Graph): le graphe
+    
+    Returns:
+        int : La distance maximale entre 2 paires quelquonques du graphe
+    """
+    maxim = 0
+    acteur_max = None
+    for acteur in G.nodes:
+        centralite_act = centralite(G, acteur)
+        if maxim < centralite_act:
+            maxim = centralite_act
+            acteur_max = acteur
+    return acteur_max
 
 # Bonus
 def centralite_groupe(G,S):
