@@ -235,7 +235,7 @@ def centre_hollywood(G):
         if acteur_max is None or minim > centralite_act:
             acteur_max = acteur
             minim = centralite_act
-    return acteur
+    return acteur_max
 
 # Q5
 def eloignement_max(G:nx.Graph):
