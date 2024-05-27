@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 
 # Q1
 def from_json(nom_fichier):
@@ -67,6 +66,8 @@ def collaborateurs_communs(G,u,v):
     Returns:
         set : l'ensemble des collaborateurs
     '''
+    if u not in G.nodes or v not in G.nodes:
+        return None
     return set(G[u]) & set(G[v])
 '''
 Comment exprimeriez-vous cette notion (ensemble des collaborateurs en commun) en terme de théorie
@@ -114,6 +115,8 @@ def est_proche(G, u,v,k=1):
     Returns:
         bool: True si v est à distance au plus k de u, False sinon
     """
+    if u not in G.nodes or v not in G.nodes:
+        return None
     return v in collaborateurs_proches(G, u, k)
     
 def distance_naive(G,u,v):
@@ -127,6 +130,8 @@ def distance_naive(G,u,v):
     Returns:
         int: la distance entre u et v
     """
+    if u not in G.nodes or v not in G.nodes:
+        return None
     dist = 1
     dist_max = len(G.nodes())
     for _ in range(dist_max):
@@ -147,7 +152,7 @@ Nous nous retrouvons donc avec une complexité de O(n^4) avec n le nombre de som
 
 def distance(G,u,v):
     k = len(G.nodes())
-    if u not in G.nodes:
+    if u not in G.nodes or v not in G.nodes:
         print(u,"est un illustre inconnu")
         return None
     collaborateurs = set()
