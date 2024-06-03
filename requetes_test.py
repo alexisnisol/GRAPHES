@@ -39,4 +39,18 @@ def test_distance():
     assert req.distance(G, "inaccessible", "James Woods") == -1
 
 def test_centralite():
-    G = jeu_donnees()
+    G9 = nx.Graph()
+    G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
+    assert req.centralite(G9, 4) == 3
+    assert req.centralite(G9, 10) == 5
+    assert req.centralite(G9, 564) is None
+
+def test_centre_hollywood():
+    G9 = nx.Graph()
+    G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
+    assert req.centre_hollywood(G9) is None
+
+def test_eloignement():
+    G9 = nx.Graph()
+    G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
+    assert req.eloignement_max(G9) == 6

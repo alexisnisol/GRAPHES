@@ -203,6 +203,8 @@ def centralite(t,u):
     Returns:
         int: la distance maximal avec un autre acteur dans le graph
     """
+    if u not in t.nodes:
+        return None
     G = t.copy()
     G.nodes[u]['distance_max'] = 0
     distance_max = 0
