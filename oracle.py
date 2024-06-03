@@ -34,12 +34,12 @@ G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)]
 #print("Centralité de 4", req.centralite(G9, 4))
 #print("Centralité de 10", req.centralite(G9, 10))
 #print(req.centre_hollywood(G))
+print(req.eloignement_max(G9))
 
 
-
-start_time = datetime.now()
+#start_time = datetime.now()
 #print(req.centralite_aaa(G, "Walter Matthau"))
-show_time(start_time)
+#show_time(start_time)
 
 
 
