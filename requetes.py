@@ -197,7 +197,7 @@ def centralite(t,u):
     """Renvoie la centralité de l'acteur u dans le graphe G
 
     Args:
-        G (nx.Graph): le graphe
+        t (nx.Graph): le graphe
         u (str): un acteur
 
     Returns:
@@ -234,16 +234,18 @@ def centralite(t,u):
 
 
 
-def centraliteV2(G,u):
+def centraliteV2(t,u):
     """Renvoie la centralité de l'acteur u dans le graphe G
 
     Args:
-        G (nx.Graph): le graphe
+        t (nx.Graph): le graphe
         u (str): un acteur
 
     Returns:
         int: la distance maximal avec un autre acteur dans le graph
     """
+    if u not in t.nodes:
+        return None
     G = t.copy()
     G.nodes[u]['distance_max'] = 0
     distance_max = 0
@@ -278,6 +280,8 @@ def centraliteV3(G, u):
     Returns:
         int: la distance maximal avec un autre acteur dans le graph
     """
+    if u not in G.nodes:
+        return None
     distance_max = 0
     distances = {u: 0}
     # visite contient les acteurs déjà parcourus
