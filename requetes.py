@@ -198,7 +198,7 @@ def centralite(t,u):
     Returns:
         int: la distance maximal avec un autre acteur dans le graph
     """
-    G = t.copy()
+    G = t.copy() #A SUPPRIMER
     G.nodes[u]['distance_max'] = 0
     distance_max = 0
     acteur_actuel = u
@@ -222,8 +222,77 @@ def centralite(t,u):
         if distance_max < G.nodes[acteur_actuel]['distance_max']:
             distance_max = G.nodes[acteur_actuel]['distance_max']
         # on cherche l'acteur le plus proche, O(|E|) avec E l'ensemble des arêtes
-        acteur_actuel = cherche_acteur_mini(acteurs_mini)
+        acteur_actuel = cherche_acteur_mini(acteurs_mini)  #A SUPPRIMER
     return distance_max
+
+
+
+def centraliteV2(G,u):
+    """Renvoie la centralité de l'acteur u dans le graphe G
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+
+    Returns:
+        int: la distance maximal avec un autre acteur dans le graph
+    """
+    G = t.copy()
+    G.nodes[u]['distance_max'] = 0
+    distance_max = 0
+    # visite contient les acteurs déjà parcourus
+    visite = set()
+    sommets_a_explorer = [u]
+    # parcours des noeuds du graphe, O(|V|) avec V l'ensemble des noeuds
+    while (len(sommets_a_explorer)>0):
+        acteur_actuel = sommets_a_explorer.pop(0)
+        visite.add(acteur_actuel)
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes
+        for voisin in G.adj[acteur_actuel]:
+            if voisin not in visite:
+                if 'distance_max' not in G.nodes[voisin]:
+                    G.nodes[voisin]['distance_max'] = G.nodes[acteur_actuel]['distance_max'] + 1
+                visite.add(voisin) # O(1)
+                sommets_a_explorer.append(voisin)
+
+        # on actualise la distance maximale
+        if distance_max < G.nodes[acteur_actuel]['distance_max']:
+            distance_max = G.nodes[acteur_actuel]['distance_max']
+
+    return distance_max
+
+def centraliteV3(G, u):
+    """Renvoie la centralité de l'acteur u dans le graphe G
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+
+    Returns:
+        int: la distance maximal avec un autre acteur dans le graph
+    """
+    distance_max = 0
+    distances = {u: 0}
+    # visite contient les acteurs déjà parcourus
+    visite = set()
+    sommets_a_explorer = [u]
+    # parcours des noeuds du graphe, O(|V|) avec V l'ensemble des noeuds
+    while sommets_a_explorer:
+        acteur_actuel = sommets_a_explorer.pop(0)
+        visite.add(acteur_actuel)
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes
+        for voisin in G.adj[acteur_actuel]:
+            if voisin not in visite:
+                distances[voisin] = distances[acteur_actuel] + 1
+                visite.add(voisin) # O(1)
+                sommets_a_explorer.append(voisin)
+
+        # on actualise la distance maximale
+        if distance_max < distances[acteur_actuel]:
+            distance_max = distances[acteur_actuel]
+
+    return distance_max
+
 
 # O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
 
