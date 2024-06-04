@@ -193,8 +193,8 @@ def cherche_acteur_mini(acteurs):
     return acteur_mini
 
 # Q4
-def centralite(t,u):
-    """Renvoie la centralité de l'acteur u dans le graphe G
+def centraliteV1(t,u):
+    """Renvoie la centralité de l'acteur u dans le graphe G version naïve
 
     Args:
         t (nx.Graph): le graphe
@@ -216,7 +216,7 @@ def centralite(t,u):
     acteurs_mini[u] = 0
     # parcours des noeuds du graphe, O(|V|) avec V l'ensemble des noeuds
     while len(visite) < len(G.nodes):
-        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 if 'distance_max' not in G.nodes[voisin]:
@@ -235,7 +235,7 @@ def centralite(t,u):
 
 
 def centraliteV2(t,u):
-    """Renvoie la centralité de l'acteur u dans le graphe G
+    """Renvoie la centralité de l'acteur u dans le graphe G, version optimisée qui utilise un algorithme de parcours en largeur
 
     Args:
         t (nx.Graph): le graphe
@@ -256,7 +256,7 @@ def centraliteV2(t,u):
     while (len(sommets_a_explorer)>0):
         acteur_actuel = sommets_a_explorer.pop(0)
         visite.add(acteur_actuel)
-        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 if 'distance_max' not in G.nodes[voisin]:
@@ -270,8 +270,8 @@ def centraliteV2(t,u):
 
     return distance_max
 
-def centraliteV3(G, u):
-    """Renvoie la centralité de l'acteur u dans le graphe G
+def centralite(G, u):
+    """Renvoie la centralité de l'acteur u dans le graphe G, Version 3 qui utilise un algorithme de parcours en largeur sans copie du graphe
 
     Args:
         G (nx.Graph): le graphe
@@ -291,7 +291,7 @@ def centraliteV3(G, u):
     while sommets_a_explorer:
         acteur_actuel = sommets_a_explorer.pop(0)
         visite.add(acteur_actuel)
-        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 distances[voisin] = distances[acteur_actuel] + 1
