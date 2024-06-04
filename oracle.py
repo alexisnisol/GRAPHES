@@ -38,6 +38,7 @@ G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)]
 
 
 start_time = datetime.now()
+print(req.centraliteV3(G, "Al Pacino"))
 #print(req.centralite_aaa(G, "Walter Matthau"))
 show_time(start_time)
 
@@ -45,37 +46,6 @@ show_time(start_time)
 
 #nx.draw(G9, with_labels=True)
 #plt.show()
-
-
-import sys
-
-def menu_affichage(title, header, options):
-    len_max = len(title)
-    for opt in options:
-        if len(opt) > len_max:
-            len_max = len(opt)
-    print("╭" + "─" * len_max + "╮")
-    print("│" + " " * ((len_max - len(title))//2) + title + " " * (((len_max - len(title))//2)-len(title)%2) + " │")
-    print("├" + "─" * len_max + "┤")
-    print("│" + header + " " * (len_max - len(header)) + "│")
-    print("├" + "─" * len_max + "┤")
-    for opt in options:
-        print("│" + opt + " " * (len_max - len(opt)) + "│")
-    print("╰" + "─" * len_max + "╯")
-
-
-def start():
-    quitter = False
-    menu()
-
-def menu():
-    file = "None"
-    title = "SAE Graphe"
-    header = " Fichier sélectionné : " + file
-    options = [" F: Choisir un jeu de données", " 1: collaborateurs_communs", " 2: collaborateurs_proches" , " 3: est_proche" , " 4: distance_naive", " 5: distance", " 6: centralite", " Q: Quitter"]
-    menu_affichage(title, header, options)
-
-
 
 class Oracle:
 
@@ -195,6 +165,6 @@ class Oracle:
             print("Choix invalide")
 
 oracle = Oracle(None)
-oracle.start()
+#oracle.start()
 
 #print(req.distance_naive(self.G, "James Woods", "Roy Jones Jr"))
