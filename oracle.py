@@ -10,8 +10,9 @@ def show_time(start_time):
     print('Durée de la requête : {}'.format(end_time - start_time))
     print(" ")
 
+#print("Chargement du graphe en cours...")
+#G = req.json_vers_nx("data_10000.txt")
 
-G = req.json_vers_nx("data_10000.txt")
 #nx.draw(G, with_labels=True)
 #plt.show()
 #print(req.collaborateurs_communs(G, "Marisa Berenson", "Mel Gibson"))
@@ -20,28 +21,29 @@ G = req.json_vers_nx("data_10000.txt")
 
 #print(req.est_proche(G, "James Woods", "Bruno Kirby", 4))
 
-start_time = datetime.now()
-print(req.distance_naive(G, "James Woods", "Roy Jones Jr"))
-show_time(start_time)
+#start_time = datetime.now()
+#print(req.distance_naive(G, "James Woods", "Roy Jones Jr"))
+#show_time(start_time)
 
-start_time = datetime.now()
-print(req.distance(G, "James Woods", "Roy Jones Jr"))
-show_time(start_time)
+#start_time = datetime.now()
+#print(req.distance(G, "James Woods", "Roy Jones Jr"))
+#show_time(start_time)
 
-G9 = nx.Graph()
-G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
+#G9 = nx.Graph()
+#G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
 
 #print("Centralité de 4", req.centralite(G9, 4))
 #print("Centralité de 10", req.centralite(G9, 10))
 #print(req.centre_hollywood(G))
-print(req.eloignement_max(G9))
+#print(req.eloignement_max(G9))
 
 
 
-start_time = datetime.now()
-print(req.centraliteV3(G, "Al Pacino"))
+#start_time = datetime.now()
+#print(req.centralite(G, "Al Pacino"))
+#print(req.centre_hollywood(G))
 #print(req.centralite_aaa(G, "Walter Matthau"))
-show_time(start_time)
+#show_time(start_time)
 
 
 
@@ -82,7 +84,7 @@ class Oracle:
         if self.G == None:
             self.options = [" F: Choisir un jeu de données", " Q: Quitter"]
         else:
-            self.options = [" F: Choisir un jeu de données", " 1: collaborateurs_communs", " 2: collaborateurs_proches" , " 3: est_proche" , " 4: distance_naive", " 5: distance", " 6: centralite acteur", "7: centralite hollywood", "8: eloignement max", " Q: Quitter"]
+            self.options = [" F: Choisir un jeu de données", " 1: collaborateurs_communs", " 2: collaborateurs_proches" , " 3: est_proche" , " 4: distance_naive", " 5: distance", " 6: centralite acteur", " 7: centralite hollywood", " 8: eloignement max", " Q: Quitter"]
         self.menu_affichage(title, header, self.options)
 
         choix = input("Choix : ")
@@ -162,10 +164,21 @@ class Oracle:
                 start_time = datetime.now()
                 print("La centralité de l'acteur est : ", req.centralite(self.G, actor))
                 show_time(start_time)
+        elif choix == "7":
+            print("Calcul du centre d'Hollywood en cours...")
+            start_time = datetime.now()
+            print("Le centre d'Hollywood est : ", req.centre_hollywood(self.G))
+            show_time(start_time)
+        elif choix == "8":
+            print("Calcul de l'éloignement maximal en cours...")
+            start_time = datetime.now()
+            print("L'éloignement maximal est : ", req.eloignement_max(self.G))
+            show_time(start_time)
         else:
             print("Choix invalide")
 
 oracle = Oracle(None)
-#oracle.start()
+oracle.start()
+
 
 #print(req.distance_naive(self.G, "James Woods", "Roy Jones Jr"))
