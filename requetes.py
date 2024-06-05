@@ -1,4 +1,5 @@
 import networkx as nx
+from collections import deque
 
 # Q1
 def from_json(nom_fichier):
@@ -270,7 +271,7 @@ def centraliteV2(t,u):
 
     return distance_max
 
-def centralite(G, u):
+def centraliteV3(G, u):
     """Renvoie la centralité de l'acteur u dans le graphe G, Version 3 qui utilise un algorithme de parcours en largeur sans copie du graphe
 
     Args:
@@ -304,10 +305,39 @@ def centralite(G, u):
 
     return distance_max
 
+def centralite(G, u):
+    """Renvoie la centralité de l'acteur u dans le graphe G, Version 4 semblable à la version 3 mais avec une deque : plus rapide pour les pop(0) et retire des variables inutiles
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+
+    Returns:
+        int: la distance maximal avec un autre acteur dans le graph
+    """
+    if u not in G.nodes:
+        return None
+    distance_max = 0
+    # visite contient les acteurs déjà parcourus
+    visite = {u: 0}
+    sommets_a_explorer = deque([u])
+    # parcours des noeuds du graphe, O(|V|) avec V l'ensemble des noeuds
+    while sommets_a_explorer:
+        acteur_actuel = sommets_a_explorer.popleft()
+        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
+        for voisin in G.adj[acteur_actuel]:
+            if voisin not in visite:
+                visite[voisin] = visite[acteur_actuel] + 1
+                if visite[voisin] > distance_max:
+                    distance_max = visite[voisin]
+                sommets_a_explorer.append(voisin)
+
+    return distance_max
+
 
 # O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
 
-def centre_hollywood(G):
+def centre_hollywood(G, debug=False):
     """retourne l'acteur le plus au centre d'hollywood
 
     Args:
@@ -318,11 +348,16 @@ def centre_hollywood(G):
     """
     minim = None
     acteur_max = None
+    i = 0
+    len_act = len(G.nodes)
     for acteur in G.nodes:
+        if debug:
+            print(i, "/", len_act,":", acteur)
         centralite_act = centralite(G, acteur)
         if acteur_max is None or minim > centralite_act:
             acteur_max = acteur
             minim = centralite_act
+        i += 1
     return acteur_max
 
 # Q5
