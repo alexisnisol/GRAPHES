@@ -10,45 +10,9 @@ def show_time(start_time):
     print('Durée de la requête : {}'.format(end_time - start_time))
     print(" ")
 
-#print("Chargement du graphe en cours...")
-#G = req.json_vers_nx("data_10000.txt")
-
-#nx.draw(G, with_labels=True)
-#plt.show()
-#print(req.collaborateurs_communs(G, "Marisa Berenson", "Mel Gibson"))
-
-#print(req.collaborateurs_proches(G, "James Woods", 1))
-
-#print(req.est_proche(G, "James Woods", "Bruno Kirby", 4))
-
-#start_time = datetime.now()
-#print(req.distance_naive(G, "James Woods", "Roy Jones Jr"))
-#show_time(start_time)
-
-#start_time = datetime.now()
-#print(req.distance(G, "James Woods", "Roy Jones Jr"))
-#show_time(start_time)
-
-#G9 = nx.Graph()
-#G9.add_edges_from([(1,4),(4,2),(4,3),(4,5),(5,6),(2,7),(6,8),(8,9),(7,10),(9,4)])
-
-#print("Centralité de 4", req.centralite(G9, 4))
-#print("Centralité de 10", req.centralite(G9, 10))
-#print(req.centre_hollywood(G))
-#print(req.eloignement_max(G9))
-
-
-
-#start_time = datetime.now()
-#print(req.centralite(G, "Al Pacino"))
-#print(req.centre_hollywood(G))
-#print(req.centralite_aaa(G, "Walter Matthau"))
-#show_time(start_time)
-
-
-
-#nx.draw(G9, with_labels=True)
-#plt.show()
+# Exemples d'acteurs
+# Al Pacino
+# James Woods / Roy Jones Jr
 
 class Oracle:
 
@@ -181,6 +145,3 @@ class Oracle:
 
 oracle = Oracle(None)
 oracle.start()
-
-
-#print(req.distance_naive(self.G, "James Woods", "Roy Jones Jr"))
