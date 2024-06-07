@@ -319,7 +319,7 @@ def centralite(G, u):
 
     return distance_max
 
-# O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
+# O( |V| + 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
 
 
 def centre_hollywood(G, debug=False):
