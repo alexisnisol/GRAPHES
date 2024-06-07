@@ -70,11 +70,6 @@ def collaborateurs_communs(G,u,v):
     if u not in G.nodes or v not in G.nodes:
         return None
     return set(G[u]) & set(G[v])
-'''
-Comment exprimeriez-vous cette notion (ensemble des collaborateurs en commun) en terme de théorie
-des graphes? Pouvez-vous donner une borne inférieure sur le temps nécessaire à l’exécution de votre
-fonction?
-'''
 
 # Q3
 def collaborateurs_proches(G,u,k):
@@ -98,11 +93,6 @@ def collaborateurs_proches(G,u,k):
                     collaborateurs_directs.add(voisin)
         collaborateurs = collaborateurs.union(collaborateurs_directs)
     return collaborateurs
-
-'''
-collaborateurs_proches :
-Reconnaissez-vous l’algorithme classique en théorie des graphes qui est au coeur de ce programme?
-'''
 
 def est_proche(G, u,v,k=1):
     """Fonction renvoyant True si l'acteur v est à distance au plus k de l'acteur u dans le graphe G. La fonction renvoie False sinon.
@@ -142,16 +132,17 @@ def distance_naive(G,u,v):
         dist += 1
     return -1
 
-'''
-distance_naive :
-Est-ce que ré-utiliser la fonction précédente vous semble intéressant? Donnez la complexité (asymptotique) d’un tel algorithme.
-
-La réutilisation de la fonction précédente ne me semble pas intéressante car elle est situé dans une boucle.
-Nous nous retrouvons donc avec une complexité de O(n^4) avec n le nombre de sommets du graphe.
-'''
-
-
 def distance(G,u,v):
+    """Fonction renvoyant la distance entre les acteurs u et v dans le graphe G. La fonction renvoie -1 si u et v ne sont pas connectés.
+
+    Args:
+        G (nx.Graph): le graphe
+        u (str): un acteur
+        v (str): un acteur
+
+    Returns:
+        int: la distance entre u et v
+    """
     k = len(G.nodes())
     if u not in G.nodes or v not in G.nodes:
         print(u,"est un illustre inconnu")
@@ -169,17 +160,11 @@ def distance(G,u,v):
         collaborateurs = collaborateurs.union(collaborateurs_directs)
     return -1
 
-'''
-distance :
-Donnez la complexité d’un tel algorithme.
-'''
-
-
+# Fonction annexe pour centraliteV1
 def cherche_acteur_mini(acteurs):
     """Fonction renvoyant l'acteur non visité le plus proche du graphe G
 
     Args:
-        G (nx.Graph): le graphe
         visite (set): les acteurs déjà visités
 
     Returns:
@@ -217,7 +202,7 @@ def centraliteV1(t,u):
     acteurs_mini[u] = 0
     # parcours des noeuds du graphe, O(|V|) avec V l'ensemble des noeuds
     while len(visite) < len(G.nodes):
-        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
+        # parcours des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 if 'distance_max' not in G.nodes[voisin]:
@@ -257,7 +242,7 @@ def centraliteV2(t,u):
     while (len(sommets_a_explorer)>0):
         acteur_actuel = sommets_a_explorer.pop(0)
         visite.add(acteur_actuel)
-        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
+        # parcours des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 if 'distance_max' not in G.nodes[voisin]:
@@ -292,7 +277,7 @@ def centraliteV3(G, u):
     while sommets_a_explorer:
         acteur_actuel = sommets_a_explorer.pop(0)
         visite.add(acteur_actuel)
-        # parcoure des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
+        # parcours des voisins du noeud actuel, O(|E|) avec E l'ensemble des arêtes adjacentes
         for voisin in G.adj[acteur_actuel]:
             if voisin not in visite:
                 distances[voisin] = distances[acteur_actuel] + 1
@@ -334,8 +319,8 @@ def centralite(G, u):
 
     return distance_max
 
-
 # O( |V| * 2 * |E| ) avec V l'ensemble des noeuds et E l'ensemble des arêtes
+
 
 def centre_hollywood(G, debug=False):
     """retourne l'acteur le plus au centre d'hollywood
