@@ -66,7 +66,7 @@ class Oracle:
             if len(opt) > len_max:
                 len_max = len(opt)
         print("╭" + "─" * len_max + "╮")
-        print("│" + " " * ((len_max - len(title))//2) + title + " " * (((len_max - len(title))//2)-len(title)%2) + " │")
+        print("│" + " " * ((len_max - len(title))//2) + title + " " * (((len_max - len(title)-1)//2)-len(title)%2) + " │")
         print("├" + "─" * len_max + "┤")
         print("│" + header + " " * (len_max - len(header)) + "│")
         print("├" + "─" * len_max + "┤")
