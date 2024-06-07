@@ -84,7 +84,7 @@ class Oracle:
         if self.G == None:
             self.options = [" F: Choisir un jeu de données", " Q: Quitter"]
         else:
-            self.options = [" F: Choisir un jeu de données", " 1: collaborateurs_communs", " 2: collaborateurs_proches" , " 3: est_proche" , " 4: distance_naive", " 5: distance", " 6: centralite acteur", " 7: centralite hollywood", " 8: eloignement max", " Q: Quitter"]
+            self.options = [" F: Choisir un jeu de données", " A: Afficher le graphe", " 1: collaborateurs_communs", " 2: collaborateurs_proches" , " 3: est_proche" , " 4: distance_naive", " 5: distance", " 6: centralite acteur", " 7: centralite hollywood", " 8: eloignement max", " Q: Quitter"]
         self.menu_affichage(title, header, self.options)
 
         choix = input("Choix : ")
@@ -103,7 +103,9 @@ class Oracle:
                 self.G = req.json_vers_nx(self.file)
             else:
                 self.file = "None"
-
+        elif choix == "A":
+            nx.draw(self.G, with_labels=True)
+            plt.show()
         elif choix == "1":
             actor1 = input("Acteur 1 : ")
             actor2 = input("Acteur 2 : ")
